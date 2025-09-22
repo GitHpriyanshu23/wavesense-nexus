@@ -39,7 +39,7 @@ const navigationItems = [
 
 export function DashboardSidebar() {
   const location = useLocation()
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true) // Start collapsed by default
   const currentPath = location.pathname
 
   const isActive = (path: string) => {
@@ -49,7 +49,11 @@ export function DashboardSidebar() {
   }
 
   return (
-    <Sidebar className={cn("border-sidebar-border", collapsed ? "w-16" : "w-64")}>
+    <Sidebar 
+      className={cn("border-sidebar-border transition-all duration-300", collapsed ? "w-16" : "w-64")}
+      onMouseEnter={() => setCollapsed(false)}
+      onMouseLeave={() => setCollapsed(true)}
+    >
       <SidebarHeader className="p-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
