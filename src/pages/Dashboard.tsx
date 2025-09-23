@@ -5,13 +5,13 @@ import { Analytics } from "@/components/dashboard/Analytics"
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background w-full">
       <DashboardHeader 
         title="WaveSense Authority Dashboard"
         subtitle="Real-time coastal hazard monitoring and emergency response coordination"
       />
       
-      <main className="flex-1 space-y-6 p-6">
+      <main className="flex-1 space-y-6 p-6 max-w-full overflow-x-hidden">
         {/* Key Statistics */}
         <StatsGrid />
         

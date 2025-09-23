@@ -23,7 +23,6 @@ import {
   Waves
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useState } from "react"
 
 const navigationItems = [
   { title: "Dashboard", url: "/", icon: Activity, description: "Overview & Status" },
@@ -39,7 +38,6 @@ const navigationItems = [
 
 export function DashboardSidebar() {
   const location = useLocation()
-  const [collapsed, setCollapsed] = useState(true) // Start collapsed by default
   const currentPath = location.pathname
 
   const isActive = (path: string) => {
@@ -49,29 +47,23 @@ export function DashboardSidebar() {
   }
 
   return (
-    <Sidebar 
-      className={cn("border-sidebar-border transition-all duration-300", collapsed ? "w-16" : "w-64")}
-      onMouseEnter={() => setCollapsed(false)}
-      onMouseLeave={() => setCollapsed(true)}
-    >
+    <Sidebar className="border-sidebar-border w-64 fixed left-0 top-0 h-full z-10">
       <SidebarHeader className="p-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
             <Waves className="h-6 w-6 text-primary-foreground" />
           </div>
-          {!collapsed && (
-            <div className="flex flex-col">
-              <h2 className="text-lg font-bold text-sidebar-foreground">WaveSense</h2>
-              <p className="text-xs text-sidebar-foreground/60">Authority Portal</p>
-            </div>
-          )}
+          <div className="flex flex-col">
+            <h2 className="text-lg font-bold text-sidebar-foreground">WaveSense</h2>
+            <p className="text-xs text-sidebar-foreground/60">Authority Portal</p>
+          </div>
         </div>
       </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-sidebar-foreground/60 text-xs font-medium uppercase tracking-wider">
-            {!collapsed ? "Navigation" : ""}
+            Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -90,12 +82,10 @@ export function DashboardSidebar() {
                       }
                     >
                       <item.icon className="h-5 w-5 flex-shrink-0" />
-                      {!collapsed && (
-                        <div className="flex flex-col min-w-0">
-                          <span className="text-sm font-medium truncate">{item.title}</span>
-                          <span className="text-xs opacity-60 truncate">{item.description}</span>
-                        </div>
-                      )}
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-sm font-medium truncate">{item.title}</span>
+                        <span className="text-xs opacity-60 truncate">{item.description}</span>
+                      </div>
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
